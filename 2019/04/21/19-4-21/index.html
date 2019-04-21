@@ -19,7 +19,7 @@
     <meta name="keywords" content>
 
 
-    <meta name="description" content="������Ҫѧϰ���̼߳�һ�����й�JVM�Ķ�������װ��ubuntu��������linux�µ�eclipse ���ܽ�һ��ѧϰJAVA���̱߳����������...">
+    <meta name="description" content="这周主要学习多线程及一部分有关JVM的东西。安装了ubuntu，试了试linux下的eclipse 。总结一下学习JAVA多线程编程遇到的问题及注意事项：安卓中HTTP等网络请求不能在主线程执行...">
 
 
 
@@ -172,7 +172,7 @@
     </div>
     
     <div class="post-body post-content">
-        <p>������Ҫѧϰ���̼߳�һ�����й�JVM�Ķ�����<br>��װ��ubuntu��������linux�µ�eclipse ��<br>�ܽ�һ��ѧϰJAVA���̱߳�����������⼰ע�����<br>��׿��HTTP�����������������߳�ִ�У�����ᱨ����android.os.NetworkOnMainThreadException<br>�������߳���������ַ������̳�Thread��дrun��ʵ��Runnable�ӿڡ�ͨ��Threadpool<br>ʹ��isInterrupted�������ƶ��߳��е�ѭ��ʱ�����ж�һЩ��������״̬��I/O����������д�ļ�������socket����ȡ������������Ҫͬʱ������������������close���������ܹ������˳���ʹ��volatile���εı�������ѭ��ʱͬ����<br>java��ʵ��ͬ���ķ�ʽ�����Ϊ���¼��֣�<br>    synchronized�ؼ���<br>    wait��notify��<br>    Concurrent���е�ReentrantLock<br>    volatile�ؼ���<br>    ThreadLocal�ֲ�����<br>volatile��Ŀ���ǻ������ͺ������Ļ������󡣼����������ε��Ǽ����࣬����Map����ô����֤�Ķ��ɼ���map�����ã�������map����<br>ThreadLocalÿ��ʹ���궼����expungeStaleEntry��������ݡ�</p>
+        <p>这周主要学习多线程及一部分有关JVM的东西。<br>安装了ubuntu，试了试linux下的eclipse 。<br>总结一下学习JAVA多线程编程遇到的问题及注意事项：<br>安卓中HTTP等网络请求不能在主线程执行，否则会报错：android.os.NetworkOnMainThreadException<br>创建多线程任务的三种方法：继承Thread复写run、实现Runnable接口、通过Threadpool<br>使用isInterrupted（）控制多线程中的循环时不能中断一些处于阻塞状态的I/O操作。比如写文件，或者socket传输等。这种情况，需要同时调用正在阻塞操作的close方法，才能够正常退出。使用volatile修饰的变量控制循环时同理。<br>java中实现同步的方式大体分为以下几种：<br>    synchronized关键字<br>    wait、notify等<br>    Concurrent包中的ReentrantLock<br>    volatile关键字<br>    ThreadLocal局部变量<br>volatile的目标是基本类型和它锁的基本对象。假如是它修饰的是集合类，比如Map，那么它保证的读可见是map的引用，而不是map对象。<br>ThreadLocal每次使用完都调用expungeStaleEntry来清除数据。</p>
 
     </div>
     

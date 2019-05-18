@@ -19,8 +19,8 @@
     <meta name="keywords" content>
 
 
-    <meta name="description" content="更新了eclipse的web插件，与tomcat关联后测试服务器
-">
+    <meta name="description" content="###Servlet与jsp关联
+##在WEB-INF创建下表1234567891011&lt;?xml version=" 1.0" encoding="UTF-8" ?&gt;&lt;web-a...">
 
 
 
@@ -32,7 +32,7 @@
     <!--Title-->
 
 
-<title>在tomcat上测试服务器 | Cigar&amp;Coffee</title>
+<title>使用jsp和servlet时遇到的坑 | Cigar&amp;Coffee</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Cigar&amp;Coffee" type="application/atom+xml">
@@ -137,9 +137,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="在tomcat上测试服务器">
+        <h1 id="使用jsp和servlet时遇到的坑">
             
-	            在tomcat上测试服务器
+	            使用jsp和servlet时遇到的坑
             
         </h1>
         <div class="post-meta">
@@ -163,7 +163,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2019/05/17</span>
+            <span class="date-meta">2019/05/18</span>
         </span>
         
     
@@ -173,7 +173,13 @@
     </div>
     
     <div class="post-body post-content">
-        <p>更新了eclipse的web插件，与tomcat关联后测试服务器</p>
+        <p>###Servlet与jsp关联</p>
+<p>##在WEB-INF创建下表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;web-app xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> xmlns=<span class="string">"http://java.sun.com/xml/ns/javaee"</span> xsi:schemaLocation=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span> version=<span class="string">"2.5"</span>&gt;</span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">    &lt;servlet-name&gt;Servlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;com.MWebServer.Servlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;Servlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/MWebServer/Servlet&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##在表单中使用action绑定<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"Servlet"</span>  method=<span class="string">"POST"</span>&gt;</span><br><span class="line">	用户名：&lt;input <span class="built_in">type</span>=<span class="string">"text"</span>  name=<span class="string">"username"</span>/&gt;&lt;br&gt;</span><br><span class="line">	密码：&lt;input <span class="built_in">type</span>=<span class="string">"password"</span> name=<span class="string">"password"</span>/&gt;&lt;br&gt;</span><br><span class="line">	&lt;br&gt;&lt;input <span class="built_in">type</span>=<span class="string">"submit"</span>/&gt;</span><br><span class="line">	&lt;input <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"case"</span> value=<span class="string">"login"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###使用session在重定向页面后获取参数</p>
+<p>##在GET函数中向Session添加参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">	...</span><br><span class="line">	request.getsession().setAttribute(...,...);</span><br><span class="line">	response.sendRedirect(...);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>##在jsp中调用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%String data=(String)session.getAttribute(<span class="string">"data"</span>); out.print(data);%&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###在GET函数中取得全部input,生成map<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; res = new HashMap&lt;String, String&gt;();</span><br><span class="line">		Enumeration&lt;?&gt; temp = request.getParameterNames();</span><br><span class="line">		<span class="keyword">if</span> (null != temp) &#123;</span><br><span class="line">			<span class="keyword">while</span> (temp.hasMoreElements()) &#123;</span><br><span class="line">				String en = (String) temp.nextElement();</span><br><span class="line">				String value =request.getParameter(en);</span><br><span class="line">				res.put(en, value);</span><br><span class="line">				<span class="keyword">if</span> (null == res.get(en) || <span class="string">""</span>.equals(res.get(en))) &#123;</span><br><span class="line">					res.remove(en);</span><br><span class="line">		&#125;&#125;&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
     
@@ -191,15 +197,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/05/18/使用jsp和servlet时遇到的坑/" class="pre-post btn btn-default" title="使用jsp和servlet时遇到的坑">
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">使用jsp和servlet时遇到的坑</span>
-        </a>
     
-    
-        <a href="/2019/03/30/关于github里的另一个项目/" class="next-post btn btn-default" title="关于github里的另一个项目">
+        <a href="/2019/05/17/在tomcat上测试服务器/" class="next-post btn btn-default" title="在tomcat上测试服务器">
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">关于github里的另一个项目</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">在tomcat上测试服务器</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
